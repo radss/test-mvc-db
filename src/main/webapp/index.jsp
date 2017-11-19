@@ -2,6 +2,8 @@
 <body>
 <h2>Hello World!</h2>
 
-<a href="show.html">show message</a>
+<a href="empform">Add Employee</a>  
+<a href="viewemp">View Employees</a>  
+
 </body>
 </html>

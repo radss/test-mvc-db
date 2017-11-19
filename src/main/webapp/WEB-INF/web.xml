@@ -3,63 +3,14 @@
     xmlns="http://java.sun.com/xml/ns/javaee"   
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"   
     xsi:schemaLocation="http://java.sun.com/xml/ns/javaee   
-    http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
-    
- <!-- Definice abych mohl servlet (pojmenovaný jako spring) použít -->     
+    http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">  
  <servlet>  
     <servlet-name>spring</servlet-name>  
     <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>  
     <load-on-startup>1</load-on-startup>  
 </servlet>  
-
-<!-- Definice abych mohl servlet spring namapovat
-servletí soubor se jmenuje spring-servlet.xml ale název je servlet, část -servlet.xml
-je povinná!! -->  
-
 <servlet-mapping>  
-    <servlet-name>spring</servlet-name> 
-<!-- Tady se to chytne .html postfixu ať je vlastní název jakýkoliv. V index.html který se načte jako první 
-definuju vlastní odkaz (hello.html) na základě kterého se dostanu do spring-servlet.xml
-Tento spring-servlet.xml mě pak dostanu na HelloWorldController.java --> 
-
-    <url-pattern>*.html</url-pattern>  
+    <servlet-name>spring</servlet-name>  
+    <url-pattern>/</url-pattern>  
 </servlet-mapping>  
-
- <!-- Servlet pro funkci FreeMarkeru a jeho nastaveni. Toto musí být nastavené pro funkci freemarkeru -->
-<servlet>
-    <servlet-name>freemarker</servlet-name>
-    <servlet-class>freemarker.ext.servlet.FreemarkerServlet</servlet-class>
-    <init-param>
-      <param-name>TemplatePath</param-name>
-      <param-value>/</param-value>
-    </init-param>
-    <init-param>
-      <param-name>NoCache</param-name>
-      <param-value>true</param-value>
-    </init-param>
-    <init-param>
-      <param-name>ContentType</param-name>
-      <param-value>text/html</param-value>
-    </init-param>
-    <init-param>
-      <param-name>template_update_delay</param-name>
-      <param-value>0</param-value> <!-- 0 is for development only! Use higher value otherwise. -->
-    </init-param>
-    <init-param>
-      <param-name>default_encoding</param-name>
-      <param-value>UTF-8</param-value>
-    </init-param>
-    <init-param>
-      <param-name>number_format</param-name>
-      <param-value>0.##########</param-value>
-    </init-param>
-    <load-on-startup>3</load-on-startup>
-  </servlet>  
-  <servlet-mapping>
-    <servlet-name>freemarker</servlet-name>
-    <url-pattern>*.ftl</url-pattern>
-  </servlet-mapping>
- 
-  
-   
-</web-app> 
+</web-app>  

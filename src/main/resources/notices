@@ -1,0 +1,36 @@
+Radek má service-dao-demo projekt mnohem vymakanìjší
+
+1.všechny dotazy má na jednom místì v queries.xml (né napatlané v kodu jako tady)
+2.k tomuto souboru se dostava skrze vlastni naprogramovany parser (v nccCommons.jar)
+3.pomocí vlastních funkcí a spring funkcí parametrizuje sql dotazy skrze url adresy (paramName surname) . K tomu 
+používá vlastní funkci AddParam()
+
+V tomto projektu je zajímavé, že pro wirování:
+
+	  a)nad tøídou EmpDao.java není!! anotace @Component
+	  b)injektuju pomocí beany <bean id="dao" class="com.javatpoint.dao.EmpDao">  ve speing-servlet.xml 
+	  =>z toho vyplývá, že mùžu injektova buï pomocí @Autowired a @Component nebo pomocí 
+	  @Autowired a beany v spring-servlet.xml
+	  
+Podstatné beany ve spring-servlet.xml pro spojení s DB
+
+  <!-- Klíèová beana pro driver do DB. Spring tøída DataSource, kterou využívá i Radek -->  
+<bean id="ds" class="org.springframework.jdbc.datasource.DriverManagerDataSource">  
+	<property name="driverClassName" value="oracle.jdbc.driver.OracleDriver"></property>  
+	<property name="url" value="jdbc:oracle:thin:@localhost:1521:xe"></property>  
+	<property name="username" value="SYSTEM"></property>  
+	<property name="password" value="optimista1"></property>  
+</bean>  
+
+ <!-- Klíèová beana pro definici a zprovoznìní dotazù na DB. Spring tøída JdbcTemplate, kterou využívá i Radek --> 
+<bean id="jt" class="org.springframework.jdbc.core.JdbcTemplate">  
+	<property name="dataSource" ref="ds"></property>  
+</bean>
+
+ <!-- Diky teto beane se muze injektovat do EmpDao.java pomocí @Autowired -->   
+<bean id="dao" class="com.javatpoint.dao.EmpDao">  
+	<property name="template" ref="jt"></property>  
+</bean> 
+
+
+
